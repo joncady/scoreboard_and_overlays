@@ -1,3 +1,5 @@
-Hi, this is JC, the creator of Scoreboard Editor tool.
+Hi, this is JC, the creator of Scoreboard Editor tool. Launch the .exe file, which will edit the overlay!
+
+(characters.txt is a required file so please don't delete it!)
 
 This tool allows for easy switching of a scoreboard. 
