@@ -1,0 +1,253 @@
+<html>
+<head>
+	<link rel="stylesheet" href="css/commentary.css" type="text/css" charset="utf-8">
+	<script src="js/jquery-2.0.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jstween-1.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/characters.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+			
+			var timestampOld;
+			var timestamp;
+			var cTitle1;
+			var cTitle2;
+			var cTitle3;
+			var cTitle4;
+			
+			var xmlDoc;
+		
+			var xhr = new XMLHttpRequest();
+		
+			var animating = false;
+			var doUpdate = false;
+			
+			function init() {
+
+				xhr.overrideMimeType('text/xml');
+				
+				var timeout = this.window.setInterval(function() {
+					pollHandler();
+				}, 250);
+			
+
+				$('#cTitle1').html('');
+				$('#cTitle2').html('');
+				$('#cTitle3').html('');
+				$('#cTitle4').html('');
+				$('#cTitle1').html('');
+				$('#cTitle2').html('');
+				$('#cTitle3').html('');
+				$('#cTitle4').html('');
+				$('#board').tween({
+				   opacity: {
+				          start: 0,
+					  stop: 100,
+					  time: 0,
+					  duration: 0.5,
+					  effect: 'easeIn'
+				   }   
+				   /*top:{
+
+					  start: '0',
+					  stop: '0',
+					  units: 'px',
+					  time: 0,
+					  duration: 2,
+					  effect:'easeOut'
+				   },*/
+				   /*left:{
+					  start: '320',
+					  stop: '0',
+					  units: 'px',
+					  time: 15,
+					  duration: 2,
+					  effect:'easeOut'
+				   }*/
+				});
+				
+				$.play();
+			}
+			
+			function pollHandler()
+			{
+			  loadData();
+			  if (timestamp != timestampOld) {
+				  doUpdate = true;
+			  }
+			  if (!animating && doUpdate) {
+				  updateBoard();
+			  }			  
+			}
+			
+			function loadData() {
+				xhr.open('GET', 'streamcontrol.xml');
+				xhr.send();
+				xhr.onreadystatechange = function(){
+						xmlDoc = xhr.responseXML;
+						
+						cTitle1 = getValueFromTag(xmlDoc,'cTitle1');
+						cTitle2 = getValueFromTag(xmlDoc,'cTitle2');
+						cTitle3 = getValueFromTag(xmlDoc,'cTitle3');
+						cTitle4 = getValueFromTag(xmlDoc,'cTitle4');					
+						timestampOld = timestamp;
+						timestamp = getValueFromTag(xmlDoc,'timestamp');
+						
+				}
+			}
+
+			function updateBoard() {
+				if ($('#cTitle1').html() != cTitle1) {
+					animating = true;
+					$('#cTitle1').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#cTitle1').html(cTitle1);
+						}
+					});
+					
+					$('#cTitle1').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.7,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+			
+				if ($('#cTitle2').html() != cTitle2) {
+					animating = true;
+					$('#cTitle2').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#cTitle2').html(cTitle2);
+						}
+					});
+					
+					$('#cTitle2').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.7,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+
+				if ($('#cTitle3').html() != cTitle3) {
+					animating = true;
+					$('#cTitle3').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#cTitle3').html(cTitle3);
+						}
+					});
+					
+					$('#cTitle3').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.7,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+				
+				if ($('#cTitle4').html() != cTitle4) {
+					animating = true;
+					$('#cTitle4').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#cTitle4').html(cTitle4);
+						}
+					});
+					
+					$('#cTitle4').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.7,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+				
+				$.play();
+				
+				doUpdate = false;
+			}
+			
+			function getValueFromTag (xmlDoc,tag) {
+				if (xmlDoc.getElementsByTagName(tag).length != 0 ) {
+					if (xmlDoc.getElementsByTagName(tag)[0].childNodes.length == 0) {
+							return '';
+						} else {
+							return xmlDoc.getElementsByTagName(tag)[0].childNodes[0].nodeValue;
+					}
+				} else {
+					return '';
+				}
+			}
+			
+			function getCountry (country) {
+			
+			var count = iso.findCountryByName(country);
+			if (!count)
+			count = iso.findCountryByCode(country);
+			if (!count) {
+			var count = new Array();
+			count['value'] = "unknown";
+			}
+			
+			return count['value'];
+		}		
+	</script>
+</head>
+<body onLoad="init()">
+	<div id="board">
+		<div id="cTitle3"></div>
+		<div id="cTitle4"></div>
+		<div id="cTitle1"></div>
+		<div id="cTitle2"></div>
+	</div>
+</body>
+</html>

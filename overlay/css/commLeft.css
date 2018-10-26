@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'SansationRegular';
+    src: url('Sansation_Regular-webfont.eot');
+    src: url('Sansation_Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Sansation_Regular-webfont.woff') format('woff'),
+         url('Sansation_Regular-webfont.ttf') format('truetype'),
+         url('Sansation_Regular-webfont.svg#SansationRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'SansationBold';
+    src: url('Sansation_Bold-webfont.eot');
+    src: url('Sansation_Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Sansation_Bold-webfont.woff') format('woff'),
+         url('Sansation_Bold-webfont.ttf') format('truetype'),
+         url('Sansation_Bold-webfont.svg#SansationBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+	margin:0px;
+	background-color: rgba(0, 0, 0, 0);
+	font-family: 'SansationRegular';
+	color:#FFFFFF;
+}
+
+#vs {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:640px;
+	height:200px;
+	background-image:url(../images/commLeft.png);
+}

@@ -1,0 +1,148 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="css/singles.css" type="text/css" charset="utf-8">
+		<script src="js/jquery-2.0.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jstween-1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/characters.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/updateBoard.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+
+			var timestampOld;
+			var timestamp;
+			var score1;
+			var score2;
+			var character1;
+			var character2;
+			var oldCharacter1 = "";
+			var oldCharacter2 = "";
+			var bracketLocation;
+			var bracketLink;
+			// changing this variable name breaks it for some reason
+			var mText5;
+			var date;
+			var player1;
+			var player2;
+
+			var xmlDoc;
+ 
+			var xhr = new XMLHttpRequest();
+
+			var animating = false;
+			var doUpdate = false;
+
+			function init() {
+
+				xhr.overrideMimeType('text/xml');
+
+				var timeout = this.window.setInterval(function () {
+					pollHandler();
+				}, 250);
+
+				$('#cover1').html('<img src="images/characterPortrait.png" width="82" height="58">')
+				$('#cover2').html('<img src="images/characterPortrait.png" width="82" height="58">')
+				$('#character1').opacity(0);
+				$('#score1').html('');
+				$('#character2').opacity(0);
+				$('#score2').html('');
+				$('#bracket-location').html('');
+				$('#bracket-link').html('');
+				$('#location').html('');
+				$('#date').html('');
+				$('#player1').html('');
+				$('#player2').html('');
+				$('#board').tween({
+					top: {
+						start: '-100',
+						stop: '0',
+						units: 'px',
+						time: 0,
+						duration: 2.0,
+						effect: 'easeOut'
+					}
+				});
+
+				$.play();
+			}
+
+			function pollHandler() {
+				loadData();
+				if (timestamp != timestampOld) {
+					doUpdate = true;
+				}
+				if (!animating && doUpdate) {
+					updateBoard();
+				}
+			}
+
+			function loadData() {
+				xhr.open('GET', 'scoreboard.xml');
+				xhr.send();
+				xhr.onreadystatechange = function () {
+					xmlDoc = xhr.responseXML;
+					score1 = getValueFromTag(xmlDoc, 'score1');
+					score2 = getValueFromTag(xmlDoc, 'score2');
+					character1 = getCharacter(getValueFromTag(xmlDoc, 'character1'));
+					character2 = getCharacter(getValueFromTag(xmlDoc, 'character2'));
+					bracketLocation = getValueFromTag(xmlDoc, 'bracket-location');
+					bracketLink = getValueFromTag(xmlDoc, 'bracket-link');
+					mText5 = getValueFromTag(xmlDoc, 'location');
+					date = getValueFromTag(xmlDoc, 'date');
+					player1 = getValueFromTag(xmlDoc, 'player1');
+					player2 = getValueFromTag(xmlDoc, 'player2');
+					timestampOld = timestamp;
+					timestamp = getValueFromTag(xmlDoc, 'timestamp');
+					console.log(timestamp);
+
+				}
+			}
+
+			function getValueFromTag(xmlDoc, tag) {
+				console.log(tag);
+				console.log(xmlDoc);
+				if (xmlDoc.getElementsByTagName(tag).length != 0) {
+					if (xmlDoc.getElementsByTagName(tag)[0].childNodes.length == 0) {
+						return '';
+					} else {
+						return xmlDoc.getElementsByTagName(tag)[0].childNodes[0].nodeValue;
+					}
+				} else {
+					return '';
+				}
+			}
+
+			function sleep(ms) {
+  				return new Promise(resolve => setTimeout(resolve, ms));
+			}
+
+			function getCharacter(country) {
+
+				var count = iso.findCountryByName(country);
+				if (!count)
+					count = iso.findCountryByCode(country);
+				if (!count) {
+					var count = new Array();
+					count['value'] = "unknown";
+				}
+
+				return count['value'];
+			}
+		</script>
+	</head>
+
+	<body onLoad="init()">
+		<div id="board">
+			<div id="cover1"></div>
+			<div id="cover2"></div>
+			<div id="character1"></div>
+			<div id="score1"></div>
+			<div id="character2"></div>
+			<div id="score2"></div>
+			<div id="bracket-location"></div>
+			<div id="bracket-link"></div>
+			<div id="location"></div>
+			<div id="date"></div>
+			<div id="player1"></div>
+			<div id="player2"></div>
+		</div>
+	</body>
+</html>

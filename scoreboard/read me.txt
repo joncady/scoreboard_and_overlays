@@ -1,0 +1,3 @@
+Hi, this is JC, the creator of Scoreboard Editor tool.
+
+This tool allows for easy switching of a scoreboard. 

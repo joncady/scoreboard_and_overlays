@@ -1,0 +1,145 @@
+@font-face {
+	font-family: 'Stolzl';
+	src: url('StolzlBold.otf');
+}
+
+body {
+	margin:0px;
+	background-color: rgba(0, 0, 0, 0);
+	font-family: 'stolzl';
+	color:#FFFFFF;
+}
+
+#board {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:1280px;
+	height:720px;
+	background-image:url('../images/doublesOverlay.png');
+}
+
+#pScore1 {
+	position:absolute;
+	left:5px;
+	top:660px;
+	width:47px;
+	font-size:50px;
+	text-align:center;
+}
+#pScore2 {
+	position:absolute;
+	left:1228px;
+	top:660px;
+	width:47px;
+	font-size:50px;
+	text-align:center;
+}
+
+#leftColor {
+	position:absolute;
+	left:44px;
+	top:660px;
+}
+
+#rightColor {
+	position:absolute;
+	left:1203px;
+	top:660px;
+}
+
+#infoSlide {
+	position:absolute;
+	left:1030px;
+	top:100px;
+}
+
+#mText3 {
+	position:absolute;
+	left:740px;
+	top:47px;
+	width:160px;
+	font-size:20px;
+	font-family: 'stolzl';
+	text-align:center;
+}
+
+#mText4 {
+	position:absolute;
+	left:410px;
+	top:47px;
+	width:160px;
+	font-size:20px;
+	font-family: 'stolzl';
+	text-align:center;
+}
+
+#mText5 {
+	position:absolute;
+	left:675px;
+	top:698px;
+	width:160px;
+	font-size:20px;
+	font-family: 'stolzl';
+	text-align:center;
+}
+
+#mText6 {
+	position:absolute;
+	left:960px;
+	top:698px;
+	width:160px;
+	font-size:20px;
+	font-family: 'stolzl';
+	text-align:center;
+}
+
+#pTag1 {
+	position:absolute;
+	left:50px;
+	top:698px;
+	width:300px;
+	font-size:20px;
+	font-family: 'stolzl';
+	text-align:center;
+}
+
+#pTag2 {
+	position:absolute;
+	left:325px;
+	top:698px;
+	width:300;
+	font-size:20px;
+	text-align:center;
+}
+
+a {
+	position:absolute;
+	left:50px;
+}
+
+#p1Color {
+	position: absolute;
+	left: 86px;
+	top: 684px;
+}
+
+#p2Color {
+	position: absolute;
+	left: 640px;
+	top: 684px;
+}
+
+#p3Color {
+	position: absolute;
+	left: 366px;
+	top: 684px;
+}
+
+#p4Color {
+	position: absolute;
+	left: 926px;
+	top: 684px;
+}
+
+

@@ -1,0 +1,405 @@
+<html>
+	<head>
+	<link rel="stylesheet" href="css/doubles.css" type="text/css" charset="utf-8">
+	<script src="js/jquery-2.0.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jstween-1.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/characters.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+
+			var timestampOld;
+			var timestamp;
+			var pScore1;
+			var pScore2;
+			var mText3;
+			var mText4;
+			var mText5;
+			var mText6;
+			var pTag1;
+			var pTag2;
+			var teamColor1;
+			var teamColor2;
+			var p1Color;
+			var p2Color;
+			var p3Color;
+			var p4Color;
+			
+			var xmlDoc;
+		
+			var xhr = new XMLHttpRequest();
+		
+			var animating = false;
+			var doUpdate = false;
+			
+			function init() {
+
+				xhr.overrideMimeType('text/xml');
+				
+				var timeout = this.window.setInterval(function() {
+					pollHandler();
+				}, 250);
+			
+				
+				$('#rightColor').opacity(100);
+				$('#pScore1').html('');
+				$('#pScore2').html('');
+				$('#mText3').html('');
+				$('#mText4').html('');
+				$('#mText5').html('');
+				$('#mText6').html('');
+				$('#pTag1').html('');
+				$('#pTag2').html('');
+				$('#pTag3').html('');
+				$('#pTag4').html('');
+				$('#teamColor1').html('');
+				$('#teamColor2').html('');
+				$('#p1Color').html('');
+				$('#p2Color').html('');
+				$('#p3Color').html('');
+				$('#p4Color').html('');
+				$('#board').tween({
+				   top:{
+					  start: '100',
+					  stop: '0',
+					  units: 'px',
+					  time: 0,
+					  duration: 2.0,
+					  effect:'easeOut'
+				   }
+				});
+				
+				$.play();
+			}
+			
+			function pollHandler()
+			{
+			  loadData();
+			  if (timestamp != timestampOld) {
+				  doUpdate = true;
+			  }
+			  if (!animating && doUpdate) {
+				  updateBoard();
+			  }
+			}
+			
+			function loadData() {
+				xhr.open('GET', 'scoreboard.xml');
+				xhr.send();
+				xhr.onreadystatechange = function(){
+						xmlDoc = xhr.responseXML;
+						
+						pScore1 = getValueFromTag(xmlDoc,'score1');
+						pScore2 = getValueFromTag(xmlDoc,'score2');
+						mText3 = getValueFromTag(xmlDoc,'bracket-location');
+						mText4 = getValueFromTag(xmlDoc,'bracket-link');	
+						mText5 = getValueFromTag(xmlDoc,'location');
+						mText6 = getValueFromTag(xmlDoc,'date');
+						pTag1 = getValueFromTag(xmlDoc,'player1');
+						pTag2 = getValueFromTag(xmlDoc,'player2');	
+						pTag3 = getValueFromTag(xmlDoc,'player3');
+						pTag4 = getValueFromTag(xmlDoc,'player4');
+						teamColor1 = getValueFromTag(xmlDoc,'team-color1');
+						teamColor2 = getValueFromTag(xmlDoc,'team-color2');
+						p1Color = teamColor1;
+						p2Color = teamColor2
+						p3Color = teamColor1;
+						p4Color = teamColor2
+						timestampOld = timestamp;
+						timestamp = getValueFromTag(xmlDoc,'timestamp');
+				
+					
+				}
+			}
+			
+			function updateBoard() {
+				$('#leftColor').html('<img src="images/dubsColor/' + teamColor1 + ' left.png">');
+				$('#rightColor').html('<img src="images/dubsColor/' + teamColor2 + ' right.png">');
+				$('#p1Color').html('<img src="images/dubsColor/' + p1Color + 'Player.png">');
+				$('#p2Color').html('<img src="images/dubsColor/' + p2Color + 'Player.png">');
+				$('#p3Color').html('<img src="images/dubsColor/' + p3Color + 'Player.png">');
+				$('#p4Color').html('<img src="images/dubsColor/' + p4Color + 'Player.png">');
+
+				if ($('#pScore1').html() != pScore1) {
+					animating = true;
+					$('#pScore1').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#pScore1').html(pScore1);
+						}
+					});
+					
+					$('#pScore1').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.5,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+				
+				if ($('#pScore2').html() != pScore2) {
+					animating = true;
+					$('#pScore2').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#pScore2').html(pScore2);
+						}
+					});
+					
+					$('#pScore2').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.5,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+				
+				if ($('#mText3').html() != mText3) {
+					animating = true;
+					$('#mText3').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#mText3').html(mText3);
+						}
+					});
+					
+					$('#mText3').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.5,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+				
+				if ($('#mText4').html() != mText4) {
+					animating = true;
+					$('#mText4').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#mText4').html(mText4);
+						}
+					});
+					
+					$('#mText4').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.5,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+
+				if ($('#mText5').html() != mText5) {
+					animating = true;
+					$('#mText5').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#mText5').html(mText5);
+						}
+					});
+					
+					$('#mText5').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.5,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+				
+				if ($('#mText6').html() != mText6) {
+					animating = true;
+					$('#mText6').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#mText6').html(mText6);
+						}
+					});
+					
+					$('#mText6').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.5,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+
+				if ($('#pTag1').html() != pTag1) {
+					animating = true;
+					$('#pTag1').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#pTag1').html(pTag1);
+						}
+					});
+					
+					$('#pTag1').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.5,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+
+				if ($('#pTag2').html() != pTag2) {
+					animating = true;
+					$('#pTag2').tween({
+						opacity: {
+						  start: 100,
+						  stop: 0,
+						  time: 0,
+						  duration: 0.5,
+						  effect: 'easeIn'
+						},
+						onStop: function(){
+							$('#pTag2').html(pTag2);
+						}
+					});
+					
+					$('#pTag2').tween({
+						opacity: {
+						  start: 0,
+						  stop: 100,
+						  time: 0.5,
+						  duration: 0.5,
+						  effect: 'easeOut'
+						},
+						onStop: function(){
+							animating = false;
+						}
+					});
+				}
+				
+				$.play();
+				
+				doUpdate = false;
+			}
+			
+			function getValueFromTag (xmlDoc,tag) {
+				if (xmlDoc.getElementsByTagName(tag).length != 0 ) {
+					if (xmlDoc.getElementsByTagName(tag)[0].childNodes.length == 0) {
+							return '';
+						} else {
+							return xmlDoc.getElementsByTagName(tag)[0].childNodes[0].nodeValue;
+					}
+				} else {
+					return '';
+				}
+			}
+			
+			function getCountry (country) {
+			
+				var count = iso.findCountryByName(country);
+				if (!count)
+					count = iso.findCountryByCode(country);
+				if (!count) {
+					var count = new Array();
+					count['value'] = "unknown";
+				}
+			
+				return count['value'];
+			}
+
+	</script>
+	</head>
+	<body onLoad="init()">
+    <div id="board">
+      <div id="leftColor"></div>
+      <div id="rightColor"></div>
+      <div id="p1Color"></div>
+      <div id="p2Color"></div>
+      <div id="p3Color"></div>
+      <div id="p4Color"></div>
+      <div id="pScore1"></div>
+      <div id="pScore2"></div>
+      <div id="mText3"></div>
+      <div id="mText4"></div>
+      <div id="mText5"></div>
+      <div id="mText6"></div>
+      <div id="pTag1"></div>
+	  <div id="pTag2"></div>
+	  <div id="pTag3"></div>
+	  <div id="pTag4"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+@font-face {
+    font-family: 'SansationRegular';
+    src: url('Sansation_Regular-webfont.eot');
+    src: url('Sansation_Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Sansation_Regular-webfont.woff') format('woff'),
+         url('Sansation_Regular-webfont.ttf') format('truetype'),
+         url('Sansation_Regular-webfont.svg#SansationRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'stolzl';
+    src: url('StolzlBold.otf');
+}
+
+body {
+	margin:0px;
+	background-color: rgba(0, 0, 0, 0);
+	font-family: 'stolzl';
+	color:#FFFFFF;
+}
+
+#cTitle1 {
+	position: absolute;
+	left: 290px;
+	top:127px;
+	width: 200px;
+	height: 107px;
+	font-size: 20px;
+	text-align: center;
+	overflow: hidden;
+}
+
+#cTitle2 {
+	overflow:hidden;
+	position:absolute;
+	left:798px;
+	top:127px;
+	width:200px;
+	font-size:20px;
+	text-align:center;
+}
+
+#cTitle3 {
+	position: absolute;
+	left: 240px;
+	top: 67px;
+	width: 200px;
+	height: 107px;
+	font-size: 35px;
+	text-align: center;
+	overflow: hidden;
+}
+
+#cTitle4 {
+	position: absolute;
+	left: 855px;
+	top: 67px;
+	width: 200px;
+	height: 107px;
+	font-size: 35px;
+	text-align: center;
+	overflow: hidden;
+}

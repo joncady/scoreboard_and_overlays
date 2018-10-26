@@ -1,0 +1,142 @@
+@font-face {
+	font-family: 'Stolzl';
+	src: url('StolzlBold.otf');
+}
+
+body {
+	margin:0px;
+	background-color: rgba(0, 0, 0, 0);
+	font-family: 'Stolzl';
+	color:#FFFFFF;
+}
+
+#board {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:1280px;
+	height:200px;
+	background-image:url('../images/game.png');
+}
+
+#player1 {
+	position:absolute;
+	left:245px;
+	top:44px;
+	width:300px;
+	font-size:30px;
+	font-family: 'Stolzl';
+	text-align:center;
+}
+
+#player2 {
+	position:absolute;
+	left:700px;
+	top:44px;
+	width:300;
+	font-size:30px;
+	text-align:center;
+}
+
+#score1 {
+	position:absolute;
+	left:500px;
+	top:46px;
+	width:47px;
+	font-size:25px;
+	text-align:center;
+}
+#score2 {
+	position:absolute;
+	left:695px;
+	top:46px;
+	width:47px;
+	font-size:25px;
+	text-align:center;
+}
+
+#cover1 {
+	position:absolute;
+	left:207px;
+	top:33px;
+	z-index: 2;
+}
+
+#cover2 {
+	position:absolute;
+	left:958px;
+	top:33px;
+	z-index: 2;
+	-moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+}
+
+#character1 {
+	position:absolute;
+	left:207px;
+	top:33px;
+	z-index: 1;
+}
+
+#character2 {
+	position:absolute;
+	left:1010px;
+	top:33px;
+	width:30px;
+	-moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+}
+
+#infoSlide {
+	position:absolute;
+	left:1030px;
+	top:100px;
+}
+
+#mText3 {
+	position:absolute;
+	left:560px;
+	top:1px;
+	width:160px;
+	font-size:11px;
+	font-family: 'SansationBold';
+	text-align:center;
+}
+
+#bracket-location {
+	position:absolute;
+	left:545px;
+	top:95px;
+	width:160px;
+	font-size:15px;
+	font-family: 'Stolzl';
+	text-align:center;
+}
+
+#location {
+	position:absolute;
+	left:385px;
+	top:95px;
+	width:160px;
+	font-size:16px;
+	font-family: 'Stolzl';
+	text-align:center;
+}
+
+#date {
+	position:absolute;
+	left:700px;
+	top:95px;
+	width:160px;
+	font-size:16px;
+	font-family: 'Stolzl';
+	text-align:center;
+}
